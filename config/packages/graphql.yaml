@@ -10,3 +10,5 @@ overblog_graphql:
                     type: graphql
                     dir: "%kernel.project_dir%/config/graphql/types"
                     suffix: null
+    security:
+        handle_cors: true
