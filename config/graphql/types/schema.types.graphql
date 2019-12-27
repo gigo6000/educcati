@@ -4,7 +4,7 @@ type Query {
 
 type Course {
   id: ID!
-  title: String!
+  name: String!
   isPublished: Boolean
   sections(
      id: ID
@@ -13,7 +13,7 @@ type Course {
 
 type Section {
   id: ID!
-  title: String!
+  name: String!
   lessons (
       id: ID
   ): [Lesson]
@@ -21,9 +21,9 @@ type Section {
 
 type Lesson {
   id: ID!
-  title: String!
+  name: String!
   slug: String,
-  video: String,
+  videoUrl: String,
   duration: String,
   isCompleted: Boolean,
   isPublished: Boolean
