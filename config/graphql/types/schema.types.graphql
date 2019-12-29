@@ -6,6 +6,7 @@ type Course {
   id: ID!
   name: String!
   isPublished: Boolean
+  progress: Int
   sections(
      id: ID
   ): [Section]
@@ -27,5 +28,15 @@ type Lesson {
   duration: String,
   isCompleted: Boolean,
   isPublished: Boolean
+  textTracks (
+      id: ID
+  ): [TextTrack]
 }
 
+type TextTrack {
+  id: ID!
+  source: String!
+  language: String!
+  label: String!
+  type: String!
+}

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,16 @@ class Lesson
      * @ORM\ManyToOne(targetEntity="App\Entity\Section", inversedBy="lessons")
      */
     private $section;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TextTrack", mappedBy="lesson", orphanRemoval=true)
+     */
+    private $textTracks;
+
+    public function __construct()
+    {
+        $this->textTracks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +131,37 @@ class Lesson
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TextTrack[]
+     */
+    public function getTextTracks(): Collection
+    {
+        return $this->textTracks;
+    }
+
+    public function addTextTrack(TextTrack $textTrack): self
+    {
+        if (!$this->textTracks->contains($textTrack)) {
+            $this->textTracks[] = $textTrack;
+            $textTrack->setLesson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTextTrack(TextTrack $textTrack): self
+    {
+        if ($this->textTracks->contains($textTrack)) {
+            $this->textTracks->removeElement($textTrack);
+            // set the owning side to null (unless already changed)
+            if ($textTrack->getLesson() === $this) {
+                $textTrack->setLesson(null);
+            }
+        }
 
         return $this;
     }

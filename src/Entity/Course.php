@@ -38,6 +38,11 @@ class Course
      */
     private $sections;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $progress;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
@@ -111,6 +116,18 @@ class Course
                 $section->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProgress(): ?int
+    {
+        return $this->progress;
+    }
+
+    public function setProgress(?int $progress): self
+    {
+        $this->progress = $progress;
 
         return $this;
     }
