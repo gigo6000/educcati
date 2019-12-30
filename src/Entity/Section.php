@@ -33,6 +33,11 @@ class Section
      */
     private $lessons;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sort;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
@@ -94,6 +99,18 @@ class Section
                 $lesson->setSection(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSort(): ?int
+    {
+        return $this->sort;
+    }
+
+    public function setSort(?int $sort): self
+    {
+        $this->sort = $sort;
 
         return $this;
     }

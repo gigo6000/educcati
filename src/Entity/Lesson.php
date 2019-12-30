@@ -53,6 +53,11 @@ class Lesson
      */
     private $textTracks;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sort;
+
     public function __construct()
     {
         $this->textTracks = new ArrayCollection();
@@ -162,6 +167,18 @@ class Lesson
                 $textTrack->setLesson(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSort(): ?int
+    {
+        return $this->sort;
+    }
+
+    public function setSort(?int $sort): self
+    {
+        $this->sort = $sort;
 
         return $this;
     }
