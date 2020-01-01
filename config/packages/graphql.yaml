@@ -2,8 +2,9 @@ overblog_graphql:
     definitions:
         schema:
             query: Query
+            mutation: Mutation
             resolver_maps:
-                - App\Resolver\MyResolverMap
+                - App\GraphQL\Resolver\MyResolverMap
         mappings:
             types:
                 -
