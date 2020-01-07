@@ -50,7 +50,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
         $this->em->persist($lesson);
         $this->em->flush();
 
-        return $section;
+        return $lesson;
     }
 
     public function updateLesson(Argument $args)
@@ -87,7 +87,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
 
         $this->em->flush();
 
-        return $section;
+        return $lesson;
     }
 
     /**
