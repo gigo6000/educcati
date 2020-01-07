@@ -20,17 +20,6 @@ class CourseMutation implements MutationInterface, AliasedInterface
         $this->em = $em;
     }
 
-    public function __invoke(Argument $args): Course
-    {
-        // return $this->em->getRepository(Course::class)->findOneBy($args->getArrayCopy());
-        $course = new Course();
-        $course->setName($args->getName());
-        $this->em->persist($course);
-        $this->em->flush();
-
-        return $course;
-    }
-
     public function createCourse(Argument $args): Course
     {
         $params = $args->getArrayCopy();
@@ -38,7 +27,11 @@ class CourseMutation implements MutationInterface, AliasedInterface
 
         $course = new Course();
         $course->setName($name);
-        $course->setSlug($slug);
+
+        if (isset($slug)) {
+            $course->setSlug($slug);
+        }
+
         if (isset($progress)) {
             $course->setProgress($progress);
         }
