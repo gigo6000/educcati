@@ -41,7 +41,7 @@ class CourseMutation implements MutationInterface, AliasedInterface
         return $course;
     }
 
-    public function updateCourse(Argument $args)
+    public function updateCourse(Argument $args): Course
     {
         $params = $args->getArrayCopy();
         extract($params);
@@ -62,7 +62,7 @@ class CourseMutation implements MutationInterface, AliasedInterface
 
         $this->em->flush();
 
-        return $section;
+        return $course;
     }
 
     /**

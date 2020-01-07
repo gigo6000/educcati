@@ -40,7 +40,7 @@ class SectionMutation implements MutationInterface, AliasedInterface
         return $section;
     }
 
-    public function updateSection(Argument $args)
+    public function updateSection(Argument $args): Section
     {
         $params = $args->getArrayCopy();
         extract($params);

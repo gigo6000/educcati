@@ -21,7 +21,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
         $this->em = $em;
     }
 
-    public function createLesson(Argument $args): Section
+    public function createLesson(Argument $args): Lesson
     {
         $params = $args->getArrayCopy();
         extract($params);
@@ -53,7 +53,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
         return $lesson;
     }
 
-    public function updateLesson(Argument $args)
+    public function updateLesson(Argument $args): Lesson
     {
         $params = $args->getArrayCopy();
         extract($params);
