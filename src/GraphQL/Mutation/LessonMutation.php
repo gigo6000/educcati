@@ -46,6 +46,10 @@ class LessonMutation implements MutationInterface, AliasedInterface
             $lesson->setDuration($duration);
         }
 
+        if (isset($isCompleted)) {
+            $lesson->setIsCompleted($isCompleted);
+        }
+
         $lesson->setSection($section);
         $this->em->persist($lesson);
         $this->em->flush();
@@ -83,6 +87,10 @@ class LessonMutation implements MutationInterface, AliasedInterface
         if (isset($sectionId)) {
             $section = $this->em->getRepository(Section::class)->findOneById($sectionId);
             $lesson->setSection($section);
+        }
+
+        if (isset($isCompleted)) {
+            $lesson->setIsCompleted($isCompleted);
         }
 
         $this->em->flush();
