@@ -8,6 +8,7 @@ use App\Entity\Section;
 use App\Entity\Lesson;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LessonMutation implements MutationInterface, AliasedInterface
 {
@@ -64,6 +65,10 @@ class LessonMutation implements MutationInterface, AliasedInterface
 
         $lesson = $this->em->getRepository(Lesson::class)->findOneById($id);
 
+        if (!$lesson) {
+            throw new NotFoundHttpException("Lesson not found");
+        }
+
         if (isset($name)) {
             $lesson->setName($name);
         }
@@ -98,6 +103,23 @@ class LessonMutation implements MutationInterface, AliasedInterface
         return $lesson;
     }
 
+    public function deleteLesson(Argument $args): Bool
+    {
+        $params = $args->getArrayCopy();
+        extract($params);
+
+        $lesson = $this->em->getRepository(Lesson::class)->findOneById($id);
+
+        if (!$lesson) {
+            throw new NotFoundHttpException("Lesson not found");
+        }
+
+        $this->em->remove($lesson);
+        $this->em->flush();
+
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -105,7 +127,8 @@ class LessonMutation implements MutationInterface, AliasedInterface
     {
         return [
             'createLesson' => 'create_lesson',
-            'updateLesson' => 'update_lesson'
+            'updateLesson' => 'update_lesson',
+            'deleteLesson' => 'delete_lesson'
         ];
     }
 }

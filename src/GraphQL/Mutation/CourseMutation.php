@@ -48,6 +48,10 @@ class CourseMutation implements MutationInterface, AliasedInterface
 
         $course = $this->em->getRepository(Course::class)->findOneById($id);
 
+        if (!$course) {
+            throw new NotFoundHttpException("Course not found");
+        }
+
         if (isset($name)) {
             $course->setName($name);
         }
@@ -65,6 +69,23 @@ class CourseMutation implements MutationInterface, AliasedInterface
         return $course;
     }
 
+    public function deleteCourse(Argument $args): Bool
+    {
+        $params = $args->getArrayCopy();
+        extract($params);
+
+        $course = $this->em->getRepository(Course::class)->findOneById($id);
+
+        if (!$course) {
+            throw new NotFoundHttpException("Course not found");
+        }
+
+        $this->em->remove($course);
+        $this->em->flush();
+
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -72,8 +93,8 @@ class CourseMutation implements MutationInterface, AliasedInterface
     {
         return [
             'createCourse' => 'create_course',
-            'updateCourse' => 'update_course'
-
+            'updateCourse' => 'update_course',
+            'deleteCourse' => 'delete_course'
         ];
     }
 }

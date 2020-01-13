@@ -38,17 +38,26 @@ class MyResolverMap extends ResolverMap
                 'updateCourse' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->mutationResolver->resolve(['App\GraphQL\Mutation\CourseMutation::updateCourse', [$args]]);
                 },
+                'deleteCourse' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
+                    return $this->mutationResolver->resolve(['App\GraphQL\Mutation\CourseMutation::deleteCourse', [$args]]);
+                },
                 'createSection' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->mutationResolver->resolve(['App\GraphQL\Mutation\SectionMutation::createSection', [$args]]);
                 },
                 'updateSection' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->mutationResolver->resolve(['App\GraphQL\Mutation\SectionMutation::updateSection', [$args]]);
                 },
+                'deleteSection' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
+                    return $this->mutationResolver->resolve(['App\GraphQL\Mutation\SectionMutation::deleteSection', [$args]]);
+                },
                 'createLesson' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->mutationResolver->resolve(['App\GraphQL\Mutation\LessonMutation::createLesson', [$args]]);
                 },
                 'updateLesson' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->mutationResolver->resolve(['App\GraphQL\Mutation\LessonMutation::updateLesson', [$args]]);
+                },
+                'deleteLesson' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
+                    return $this->mutationResolver->resolve(['App\GraphQL\Mutation\LessonMutation::deleteLesson', [$args]]);
                 },
             ]
         ];

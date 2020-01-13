@@ -47,6 +47,10 @@ class SectionMutation implements MutationInterface, AliasedInterface
 
         $section = $this->em->getRepository(Section::class)->findOneById($id);
 
+        if (!$section) {
+            throw new NotFoundHttpException("Section not found");
+        }
+
         if (isset($name)) {
             $section->setName($name);
         }
@@ -65,6 +69,23 @@ class SectionMutation implements MutationInterface, AliasedInterface
         return $section;
     }
 
+    public function deleteSection(Argument $args): Bool
+    {
+        $params = $args->getArrayCopy();
+        extract($params);
+
+        $section = $this->em->getRepository(Section::class)->findOneById($id);
+
+        if (!$section) {
+            throw new NotFoundHttpException("Section not found");
+        }
+
+        $this->em->remove($section);
+        $this->em->flush();
+
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -72,7 +93,8 @@ class SectionMutation implements MutationInterface, AliasedInterface
     {
         return [
             'createSection' => 'create_section',
-            'updateSection' => 'update_section'
+            'updateSection' => 'update_section',
+            'deleteSection' => 'delete_section'
         ];
     }
 }

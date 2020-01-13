@@ -47,8 +47,11 @@ type TextTrack {
 type Mutation {
   createCourse(name: String!, slug: String, progress: Int): Course!
   updateCourse(id: ID!, name: String, slug: String, progress: Int): Course!
+  deleteCourse(id: ID!): Boolean
   createSection(name: String!, sort: Int, courseId: ID!): Section!
   updateSection(id: ID!, name: String, sort: Int, courseId: ID): Section!
+  deleteSection(id: ID!): Boolean
   createLesson(name: String!, slug: String, videoUrl: String, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID!): Lesson!
   updateLesson(id: ID!, name: String, slug: String, videoUrl: String, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID): Lesson!
+  deleteLesson(id: ID!): Boolean
 }
