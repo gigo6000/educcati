@@ -37,6 +37,7 @@ class Course
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Section", mappedBy="course")
+     * @ORM\OrderBy({"sort" = "ASC"})
      */
     private $sections;
 

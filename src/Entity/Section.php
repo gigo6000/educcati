@@ -25,11 +25,13 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Course", inversedBy="section")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $course;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lesson", mappedBy="section")
+     * @ORM\OrderBy({"sort" = "ASC"})
      */
     private $lessons;
 

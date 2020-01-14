@@ -47,6 +47,7 @@ class Lesson
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Section", inversedBy="lessons")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $section;
 
