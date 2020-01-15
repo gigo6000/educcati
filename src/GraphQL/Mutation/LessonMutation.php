@@ -103,7 +103,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
         return $lesson;
     }
 
-    public function deleteLesson(Argument $args): Bool
+    public function deleteLesson(Argument $args): Int
     {
         $params = $args->getArrayCopy();
         extract($params);
@@ -117,7 +117,7 @@ class LessonMutation implements MutationInterface, AliasedInterface
         $this->em->remove($lesson);
         $this->em->flush();
 
-        return true;
+        return $id;
     }
 
     /**

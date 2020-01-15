@@ -7,6 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use App\Entity\Course;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseMutation implements MutationInterface, AliasedInterface
 {
@@ -69,7 +70,7 @@ class CourseMutation implements MutationInterface, AliasedInterface
         return $course;
     }
 
-    public function deleteCourse(Argument $args): Bool
+    public function deleteCourse(Argument $args): Int
     {
         $params = $args->getArrayCopy();
         extract($params);
@@ -83,7 +84,7 @@ class CourseMutation implements MutationInterface, AliasedInterface
         $this->em->remove($course);
         $this->em->flush();
 
-        return true;
+        return $id;
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Entity\Section;
 use App\Entity\Course;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SectionMutation implements MutationInterface, AliasedInterface
 {
@@ -69,7 +70,7 @@ class SectionMutation implements MutationInterface, AliasedInterface
         return $section;
     }
 
-    public function deleteSection(Argument $args): Bool
+    public function deleteSection(Argument $args): Int
     {
         $params = $args->getArrayCopy();
         extract($params);
@@ -83,7 +84,7 @@ class SectionMutation implements MutationInterface, AliasedInterface
         $this->em->remove($section);
         $this->em->flush();
 
-        return true;
+        return $id;
     }
 
     /**
