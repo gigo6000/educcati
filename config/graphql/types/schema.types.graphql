@@ -1,3 +1,5 @@
+scalar FileUpload
+
 type Query {
   course(id: ID!): Course
 }
@@ -51,7 +53,7 @@ type Mutation {
   createSection(name: String!, sort: Int, courseId: ID!): Section!
   updateSection(id: ID!, name: String, sort: Int, courseId: ID): Section!
   deleteSection(id: ID!): ID
-  createLesson(name: String!, slug: String, videoUrl: String, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID!): Lesson!
-  updateLesson(id: ID!, name: String, slug: String, videoUrl: String, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID): Lesson!
+  createLesson(name: String!, slug: String, videoUrl: String, file: FileUpload, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID!): Lesson!
+  updateLesson(id: ID!, name: String, slug: String, videoUrl: String, file: FileUpload, duration: String, isCompleted: Boolean, sort: Int, sectionId: ID): Lesson!
   deleteLesson(id: ID!): ID
 }

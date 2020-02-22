@@ -51,6 +51,10 @@ class LessonMutation implements MutationInterface, AliasedInterface
             $lesson->setIsCompleted($isCompleted);
         }
 
+        if (isset($file)) {
+            $lesson->setVideoUrl(json_encode($file));
+        }
+
         $lesson->setSection($section);
         $this->em->persist($lesson);
         $this->em->flush();

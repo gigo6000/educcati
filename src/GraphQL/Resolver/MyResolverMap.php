@@ -11,6 +11,7 @@ use Overblog\GraphQLBundle\Resolver\ResolverResolver;
 use Overblog\GraphQLBundle\Resolver\MutationResolver;
 use App\GraphQL\Mutation\SectionMutation;
 use App\GraphQL\Mutation\CourseMutation;
+use Overblog\GraphQLBundle\Upload\Type\GraphQLUploadType;
 
 class MyResolverMap extends ResolverMap
 {
@@ -26,6 +27,9 @@ class MyResolverMap extends ResolverMap
     public function map()
     {
         return [
+            'FileUpload' => [self::SCALAR_TYPE => function () {
+                return new GraphQLUploadType();
+            }],
             'Query' => [
                 'course' => function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     return $this->resolverResolver->resolve([CourseResolver::class, [$args]]);
