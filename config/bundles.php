@@ -15,4 +15,5 @@ return [
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],
     Overblog\GraphiQLBundle\OverblogGraphiQLBundle::class => ['dev' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
+    Nelmio\CorsBundle\NelmioCorsBundle::class => ['all' => true],
 ];
